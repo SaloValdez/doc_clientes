@@ -9,10 +9,45 @@
   <link rel="stylesheet" href="./estilos.css">
 
   <script type="text/javascript" src="./jquery/jquery-3.3.1.min.js"></script>
+  <script type="text/javascript" src="./sweetAlert2.js">
+
+  </script>
 
     <script type="text/javascript" src="./procesos/js/asistencia.js"></script>
+
+    <script type="text/javascript">
+      // function abrirVentana(){
+      //   $(".ventana_error").slideDown("slow");
+      // }
+      // function cerrarVentana(){
+      //   $(".ventana_error").slideUp("fast");
+      // }
+
+      $(document).ready(function(){
+          $("#alert").click(function(){
+             swal2("Hola");
+          });
+      });
+    </script>
+
+
+
+
+
 </head>
 <body>
+  <input type="button" name="" value="PROBAR" id="alert">
+  <div class="ventana_error">
+
+
+    <div class="ventana_contenido">
+      <div class="cerrar"> <a href="javascript:cerrarVentana();">Cerrar X </a></div>
+      <h3>Ventana Error</h3>
+            <span class="texto"></span>
+    </div>
+  </div>
+
+<h2><a href="javascript:abrirVentana();">Abrir</a></h2>
 
   <div class="contenedor">
 <!-- FORMULARIO -->
@@ -29,13 +64,11 @@
 
 <div class="contenedor_sesion" id="contenedor_sesion">
 
-  <article class="cont-asis">
-    <p>NOMBRES Y APELLIDOS</p>
-    <p>GRUPO</p>
-    <p>HORARIO <I>ENTRADA<I> <b>12:12:12 </b> <I> SALIDA : <I><b>13:00:00</b></p>
-    <p>FRECUENCIA :  <I> lun-mar-mie-jue-sab-dom<I> </p>
-    <p>HORA ENTRADA SESION : <span> 12:12:00</span></p>
-  </article>
+  <?php
+  // include("./clases/conexion.php" ) ;
+  // include( "./clases/clase.php" ) ;
+  //   include("./procesos/seiones_activos.php");
+   ?>
 
 
 

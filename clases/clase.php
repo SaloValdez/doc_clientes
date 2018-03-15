@@ -1,5 +1,5 @@
 <?php
-require_once "../clases/conexion.php";
+// require_once "../clases/conexion.php";
 class ejemplo  {
       private function conectar(){
         $obj= new conectar();
@@ -110,7 +110,9 @@ class ejemplo  {
                                     $horaActual = $this->horaActual();
                                     //hora salida del grupo
                                     if ($horaActual< $horaSalidaLogin) {
-                                          return  'no puede salir antes de ' . $horaSalidaLogin;
+                                          return 2;
+
+                                          // return  'no puede salir antes de ' . $horaSalidaLogin;
                                     }else{
                                           $fecha_actual = date("Y/m/d");
                                           $actualizarControl = "UPDATE control SET horasal_control ='$horaActual'  WHERE fecha_control ='$fecha_actual' AND id_asisgnacion  = '$asigLogin'";
@@ -125,7 +127,8 @@ class ejemplo  {
                   return "NO ES DIA LABORABLE";
                 }
           }else {
-            return "Usted no esta registrado como docente activo. su contraseña y usuaruio incorrecto";
+            //CONTRASEÑA INCORRECTO  O GRUPO DESACTIVADO
+            return 1;
           }
       }
 
@@ -223,7 +226,7 @@ class ejemplo  {
     public function mostrarSesion(){
         $conexion =  $this->conectar();
         $consultaSesionesActivos ="SELECT CONCAT(per.nombres_per , ' ' , per.apellidos_per) AS 'nombres',
-        asig.grupo_asignacion AS 'grupo',est.hegrupo_estado AS 'entrada_grupo' ,per.area_per AS 'area' , per.cargo_per AS 'cargo',est.hsgrupo_estado AS 'salida_grupo',est.horaent_estado AS 'hora_entrada_estado',lo.grupo_login AS 'grupo',lo.grupo_login AS 'idgrupo'
+        asig.grupo_asignacion AS 'grupo',est.hegrupo_estado AS 'entrada_grupo' ,per.area_per AS 'area' , per.cargo_per AS 'cargo', per.dni_per AS 'dni',est.hsgrupo_estado AS 'salida_grupo',est.horaent_estado AS 'hora_entrada_estado',lo.grupo_login AS 'grupo',lo.grupo_login AS 'idgrupo'
         FROM  estadosesion AS est
         INNER JOIN login AS lo ON est.id_login = lo.id_login
         INNER JOIN asignacion AS asig  ON lo.id_asisgnacion = asig.id_asignacion
@@ -241,34 +244,3 @@ class ejemplo  {
         return $resultadoFrecuencia;
     }
 }
-
-
-$obj = new ejemplo();
-$mostrarSesiones =  $obj->mostrarSesion();
-// var_dump ($mostrarSesiones);
-echo "<BR><BR>";
-
-$obj2 = new ejemplo();
-?>
-
-<?php
-echo "<BR>====================================<BR>";
-  while ($actual =mysqli_fetch_assoc($mostrarSesiones)) {
-   ?>
-       <article class="sesion" id="hola">
-      <h1> <?php echo ' '.$actual['nombres'] ?></h1>
-     <p>HORARIO ENTRADA: <span><?php echo $actual['entrada_grupo'] ?></span></p>
-     <p>HORARIO SALIDA: <span><?php echo $actual['salida_grupo'] ?></span></p>
-     <p>AREA : <span><?php echo $actual['area'] ?></span></p>
-     <p>CARGO: <span><?php echo $actual['cargo'] ?></span></p>
-
-     <p>HORA INGRESO: <span><?php echo $actual['hora_entrada_estado'] ?></span></p>
-      <?php $mostrarFrecuancia =  $obj2->mostrarfrecuencia($actual['idgrupo']);
-      while ($dia=mysqli_fetch_assoc($mostrarFrecuancia)) {
-         echo '-'.$dia['dia']. '';
-      }
-      ?>
-     </article>
-       <?php
-  }
- ?>

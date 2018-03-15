@@ -107,20 +107,20 @@
 //   });
 // }
 //
-// function agregaFrmActualizar(idAlumno){
-// 	$.ajax({
-// 		type:"POST",
-// 		data:"id=" + idAlumno,
-// 		url:"./procesos/docente/obtenDatos.php",
-// 		success:function(r){
-// 			datos=jQuery.parseJSON(r);
-// 			$('#idjuego').val(datos['id_alumno']);
-// 			$('#nombreU').val(datos['nombre_alumno']);
-// 			$('#anioU').val(datos['apellido_alumno']);
-// 			$('#empresaU').val(datos['dni_alumno']);
-// 		}
-// 	});
-// }
+function agregaFrmActualizar(idAlumno){
+	$.ajax({
+		type:"POST",
+		data:"id=" + idAlumno,
+		url:"./procesos/docente/obtenDatos.php",
+		success:function(r){
+			datos=jQuery.parseJSON(r);
+			$('#idjuego').val(datos['id_alumno']);
+			$('#nombreU').val(datos['nombre_alumno']);
+			$('#anioU').val(datos['apellido_alumno']);
+			$('#empresaU').val(datos['dni_alumno']);
+		}
+	});
+}
 //
 // function eliminarDatos(idAlumno){
 // 	alertify.confirm('Eliminar un juego', '¿Seguro de eliminar este juego pro :(?', function(){
